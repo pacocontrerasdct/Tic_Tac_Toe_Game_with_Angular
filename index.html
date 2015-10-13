@@ -11,41 +11,13 @@
 <body ng-controller="TicTacToeController as movements">
 <!-- Angular is working if 2 + 3 = {{ 2 + 3}} -->
   <div id="container">
-    <div id="board">
-
-      <h1>Tic Tac Toe Game</h1>
-      
-
-<!--       <p>{{ movements.allWiningPositions[0] }}</p>
-      <p ng-if="movements.equals === true">Hello</p>
-      <p ng-if="movements.check() === true">Hello</p>
-      <p>{{ movements.check }}</p> -->
-
-
-    <form id="add-move" ng-submit="movements.add()">
-      <button class="square" ng-click="movements.newMove.move = 'x'; a = 'x'" ng-init="a = '-'">{{ a }}</button>
-      <button class="square" ng-click="movements.newMove.move = '0'; b = '0'" ng-init="b = '-'">{{ b }}</button>
-    </form>
-    
-<!--     <p>{{ movements.moves[0] }}</p>
-    <p>{{ movements.moves[1] }}</p>
-    <p>{{ movements.moves[2] }}</p> -->
-
-      <!-- <label for="multipleSelect"> Multiple select: </label><br>
-        <select name="multipleSelect" id="multipleSelect" ng-model="data.multipleSelect">
-          <option value="option-1">Option 1</option>
-          <option value="option-2">Option 2</option>
-          <option value="option-3">Option 3</option>
-          <option value="option-4">Option 4</option>
-          <option value="option-5">Option 5</option>
-          <option value="option-6">Option 6</option>
-          <option value="option-7">Option 7</option>
-          <option value="option-8">Option 8</option>
-          <option value="option-9">Option 9</option>
-        </select><br>
-      <tt>multipleSelect = {{data.multipleSelect}}</tt><br/> -->
-    
-
+      <div id="board">
+       <h1>Tic Tac Toe Game</h1>
+        <form id="add-move" class="form" ng-submit="movements.add()">
+          <button class="sqr" ng-repeat="square in movements.squares" ng-click="movements.newMove.move = square; a = square" ng-init="a = '-'">{{ a }}</button>
+        </form>
+      </div>
+      <p ng-if="movements.equals === true">A winner!</p>
     </div>
   </div>
  </body>

@@ -2,7 +2,7 @@ angular.module('tictactoeApp')
   .controller('TicTacToeController', TicTacToeController);
 
 function TicTacToeController() {
-  this.allWiningPositions = [
+  this.allWinningPositions = [
     "WWW------",
     "---WWW---",
     "------WWW",
@@ -11,38 +11,52 @@ function TicTacToeController() {
     "--W--W--W",
     "W---W---W",
     "--W-W-W--"
-  ]
-  var wining = this.allWiningPositions;
-
-  this.moves = [];
-
-  //move = this.exampleMove = "x---x---x";
-
-  //this.equals = angular.equals(this.allWiningPositions[1], this.exampleMove);
+  ];
+  var winning = this.allWinningPositions;
+  // For building squares using 'ng-repeat'
+  this.squares = [0,1,2,3,4,5,6,7,8]; 
+  // Reseting every game 
+  playerMoves = ["-","-","-","-","-","-","-","-","-"];
+  // Setting first player in move
+  this.playerPlaying = "O";
   this.newMove = { move: '' };
-
   this.add = addMove;
 
+  // Add move to playerMoves array
   function addMove() {
-    este = this.moves.push(this.newMove.move);
-    esto = this.newMove.move;
-    console.log(este);
-    console.log(esto);
+    playerMoves[this.newMove.move] = 'W';
+    squares = this.newMove.move;
+    console.log("squareId is: ", squares);
+
+    // Switching player turn
+    if(this.playerPlaying === 'O'){
+      this.playerPlaying = 'X';
+    } else {
+      this.playerPlaying = 'O';
+    }
+    console.log("player turn: ", this.playerPlaying);
+    
+    // Joining playerMoves to compare with winning possibilities
+    play = playerMoves.join('');
+    console.log("player move: ", play);
+    // Check for a winner
+    this.equals = checkForWinner();
+    console.log(equals);
   }
 
-  // this.check = checkForWinner(move, wining);
-
-  // function checkForWinner(move, wining) {    
-  //   for (var i = 0; i < wining.length; i++) {   
-  //     equals = angular.equals(wining[i], move);
-  //     if(equals === true) {
-  //       this.equals = equals;
-  //       break;
-  //     }
-  //     else {
-  //       this.equals = 'No match';
-  //     }
-  //   };
-  //}
+  function checkForWinner() {    
+    for (var i = 0; i < winning.length; i++) { 
+      // If equal to one winning result then return 'true'
+      equals = angular.equals(winning[i], playerMoves.join(''));
+      console.log('inside check');
+      if(equals === true) {
+        this.equals = equals;
+        break;
+      }
+      else {
+        this.equals = 'No match';
+      }
+    };
+  }
 
 }
